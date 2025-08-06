@@ -297,6 +297,9 @@ function App() {
 
                 {searchResults && (
                   <div className="mt-6">
+                    <div style={{display: 'none'}}>
+                      DEBUG: searchResults = {JSON.stringify(searchResults, null, 2)}
+                    </div>
                     {searchResults.error ? (
                       <Alert className="border-red-500 bg-red-900/20">
                         <AlertTriangle className="h-4 w-4" />
