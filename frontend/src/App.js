@@ -350,41 +350,6 @@ function App() {
                         ) : (
                           <p className="text-gray-400">No breaches found for this query</p>
                         )}
-                          <Card key={index} className="bg-gray-700/50 border-gray-600">
-                            <CardContent className="pt-4">
-                              <div className="flex items-start justify-between">
-                                <div>
-                                  <h4 className="font-semibold text-red-400">
-                                    {breach.Name || breach.breach_name}
-                                  </h4>
-                                  <p className="text-sm text-gray-300 mt-1">
-                                    {breach.Domain || breach.domain}
-                                  </p>
-                                  <p className="text-xs text-gray-400 mt-2">
-                                    {breach.Description || breach.description}
-                                  </p>
-                                </div>
-                                <div className="text-right">
-                                  <Badge variant={breach.IsVerified || breach.verified ? "default" : "secondary"}>
-                                    {breach.IsVerified || breach.verified ? "Verified" : "Unverified"}
-                                  </Badge>
-                                  <p className="text-xs text-gray-400 mt-1">
-                                    {formatDate(breach.BreachDate || breach.breach_date)}
-                                  </p>
-                                </div>
-                              </div>
-                              {(breach.DataClasses || breach.data_classes) && (
-                                <div className="mt-3 flex flex-wrap gap-1">
-                                  {(breach.DataClasses || breach.data_classes).map((dataClass, idx) => (
-                                    <Badge key={idx} variant="outline" className="text-xs">
-                                      {dataClass}
-                                    </Badge>
-                                  ))}
-                                </div>
-                              )}
-                            </CardContent>
-                          </Card>
-                        ))}
                       </div>
                     )}
                   </div>
