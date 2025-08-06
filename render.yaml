@@ -1,12 +1,35 @@
+# render.yaml
 services:
+  # Frontend Service
   - type: web
-    name: darkweb-frontend
-    buildCommand: cd frontend && yarn install
-    startCommand: cd frontend && yarn start
-    rootDir: ./
-  
+    name: darkweb-monitor-frontend
+    runtime: node
+    rootDir: ./frontend
+    buildCommand: yarn install
+    startCommand: yarn start
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: darkweb-monitor-backend
+          property: host
+
+  # Backend Service  
   - type: web
-    name: darkweb-backend
-    buildCommand: cd backend && pip install -r requirements.txt
-    startCommand: cd backend && python server.py
-    rootDir: ./
+    name: darkweb-monitor-backend
+    runtime: python3
+    rootDir: ./backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python server.py
+    envVars:
+      - key: MONGO_URL
+        fromDatabase:
+          type: pserv
+          name: darkweb-mongodb
+          property: connectionString
+
+  # Database
+  - type: pserv
+    name: darkweb-mongodb
+    runtime: mongodb
+    plan: starter
