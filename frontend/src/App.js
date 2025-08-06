@@ -83,9 +83,12 @@ function App() {
         endpoint = `/api/search/email/${encodeURIComponent(searchQuery)}`;
       }
       
+      console.log('Making search request to:', `${BACKEND_URL}${endpoint}`);
       const response = await fetch(`${BACKEND_URL}${endpoint}`);
       const data = await response.json();
+      console.log('Search response received:', data);
       setSearchResults(data);
+      console.log('Search results state updated');
     } catch (error) {
       console.error('Search failed:', error);
       setSearchResults({ error: 'Search failed' });
